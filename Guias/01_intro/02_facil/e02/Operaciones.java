@@ -7,16 +7,27 @@ división.
 public class Operaciones{
 
     static final String ERROR_MSG_CANT_DIVIDE_BY_CERO = "No se puede dividir por cero";
+    static final String ERROR_MSG_NON_INT = "Tiene que utilizar numeros";
+    static final String ERROR_MSG_NOT_TWO_NUMBERS = "Debe ingresar exactamente dos números";
 
     public static void main(String[] args) {
+        //It only works with 2 numbers
+        if (args.length != 2) {
+            System.out.println(ERROR_MSG_NOT_TWO_NUMBERS);
+            return;
+        }
         //args gives String so i need to convert them into int
-        int a = Integer.parseInt(args[0]);
-        int b = Integer.parseInt(args[1]);
+        try {
+            int a = Integer.parseInt(args[0]);
+            int b = Integer.parseInt(args[1]);
 
-        System.out.println(a + "+" + b + " = " + sum(a, b));
-        System.out.println(a + "-" + b + " = " + substract(a, b));
-        System.out.println(a + "*" + b + " = " + multiply(a, b));
-        System.out.println(a + "/" + b + " = " + divide(a, b));
+            System.out.println(a + "+" + b + " = " + sum(a, b));
+            System.out.println(a + "-" + b + " = " + substract(a, b));
+            System.out.println(a + "*" + b + " = " + multiply(a, b));
+            System.out.println(a + "/" + b + " = " + divide(a, b));
+        } catch (NumberFormatException e) {
+            System.out.println(ERROR_MSG_NON_INT);
+        }
     }
 
     public static int sum(int a, int b){

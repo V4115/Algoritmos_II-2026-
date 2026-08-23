@@ -1,6 +1,5 @@
 /**
- * Ejercicio 1 (facil): Saludo personal.
- * Devuelve un saludo formado a partir del nombre y el legajo del alumno.
+ * 1. Hola con tu nombre. Escribí un programa que imprima un saludo con tu nombre y tu legajo.
  */
 
 /*Posibles cambios: 
@@ -22,7 +21,6 @@ public class Saludo{
         
         Scanner sc = new Scanner(System.in);
         String name;
-        boolean nameAccepted = false;
         do { 
             try {
                 //gets a name from the keyboard and erases any spaces
@@ -43,14 +41,14 @@ public class Saludo{
 
                 
                 System.out.println(USR_MSG_GREETING + name);
-                nameAccepted = true;
                 //Close scanner before ending the program
                 sc.close();
+                return;
 
             } catch (IllegalArgumentException e) {
                 //prints of errors trhough console
                 System.out.println(e.getMessage());
             }
-        } while (!nameAccepted);
+        } while (true);
     }
 }
