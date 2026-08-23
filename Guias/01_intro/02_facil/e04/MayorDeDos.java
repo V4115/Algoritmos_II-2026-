@@ -5,7 +5,7 @@
 
 public class MayorDeDos{
 
-    static final String ERROR_MSG_NON_INT = "Tiene que utilizar numeros";
+    static final String ERROR_MSG_NON_INT = "Tiene que utilizar numeros enteros";
     static final String ERROR_MSG_NOT_TWO_NUMBERS = "Debe ingresar exactamente dos números";
     public static void main(String[] args) {
         
