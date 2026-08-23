@@ -32,7 +32,7 @@ public class CelsiusAFahrenheit{
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
-            }
+    }
 
     public static double celsiusAFahrenheit(double c){
         if (c <  CELSIUS_MIN_VALUE) {
