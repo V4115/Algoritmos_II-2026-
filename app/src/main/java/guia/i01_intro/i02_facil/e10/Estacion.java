@@ -1,3 +1,4 @@
+package guia.i01_intro.i02_facil.e10;
 /**
  * 10. Enum de estaciones. Definí un enum Estacion con las cuatro estaciones y un método que
 imprima todas con values().

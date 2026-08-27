@@ -1,3 +1,4 @@
+package guia.i01_intro.i02_facil.e07;
 /**
  * 7. Cuenta regresiva. Con un while, imprimí desde n hasta 1 y luego “¡fin!”.
  */

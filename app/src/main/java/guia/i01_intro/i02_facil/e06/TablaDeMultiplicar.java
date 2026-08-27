@@ -1,3 +1,4 @@
+package guia.i01_intro.i02_facil.e06;
 /**
  * 6. Tabla de multiplicar. Con un for, imprimí la tabla del número que se pase por args.
  */

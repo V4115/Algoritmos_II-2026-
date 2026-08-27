@@ -1,3 +1,4 @@
+package guia.i01_intro.i02_facil.e02;
 /**
  * 2. Suma de dos números. Leé dos enteros desde args y mostrá su suma, resta, producto y
 división.

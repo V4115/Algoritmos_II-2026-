@@ -1,3 +1,4 @@
+package guia.i01_intro.i02_facil.e05;
 /**
  * Conversión de temperatura. Escribí un método que convierta grados Celsius a Fahrenheit
 (F = C * 9/5 + 32). Cuidado con la división entera.

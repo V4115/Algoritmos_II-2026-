@@ -1,3 +1,4 @@
+package guia.i01_intro.i02_facil.e01;
 /**
  * 1. Hola con tu nombre. Escribí un programa que imprima un saludo con tu nombre y tu legajo.
  */

@@ -1,3 +1,4 @@
+package guia.i01_intro.i02_facil.e09;
 /**
  * 9. Día hábil. Usando un switch expression, dado un char ('L', 'M', …) devolvé “hábil” o “fin de
 semana”.

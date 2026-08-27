@@ -1,4 +1,4 @@
-
+package guia.i01_intro.i02_facil.e04;
 /**
  * 4. Mayor de dos. Escribí un método int mayor(int a, int b) que devuelva el mayor.
  */

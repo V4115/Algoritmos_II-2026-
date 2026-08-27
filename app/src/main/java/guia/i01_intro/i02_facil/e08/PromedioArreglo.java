@@ -1,3 +1,4 @@
+package guia.i01_intro.i02_facil.e08;
 /**
  * 8. Promedio de un arreglo. Dado un double[], calculá el promedio con un for-each.
  */

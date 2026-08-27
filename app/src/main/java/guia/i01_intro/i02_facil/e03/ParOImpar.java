@@ -1,3 +1,4 @@
+package guia.i01_intro.i02_facil.e03;
 /**
  * 3. Par o impar. Dado un entero, indicá si es par o impar usando el operador %.
  */

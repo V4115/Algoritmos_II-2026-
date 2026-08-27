@@ -1,3 +1,4 @@
+package guia.i01_intro.i03_medio.e01;
 /**
  * 1. Máximo de un arreglo. Escribí int maximo(int[] v) y testealo con JUnit (incluí el caso de un
 solo elemento).

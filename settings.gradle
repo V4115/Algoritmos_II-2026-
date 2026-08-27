@@ -15,3 +15,4 @@ rootProject.name = 'Algoritmos_II-2026'
 
 // Cada "módulo" de Gradle es un subproyecto. Empezamos con 'app'.
 include 'app'
+
