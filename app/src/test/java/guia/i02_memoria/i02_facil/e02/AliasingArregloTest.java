@@ -1,4 +1,4 @@
-package guia.i02_memoria.i02_facil.i02;
+package guia.i02_memoria.i02_facil.e02;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.DisplayName;
