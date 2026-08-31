@@ -1,0 +1,6 @@
+#formato: fechaRetiro;padron;socio;isbn;titulo;fechaDevolucion
+2026-04-01;39876;Bruno Ferrari,ISBN001;Estructuras de Datos;2026-04-20
+2026-04-02;41234;Ana Gomez;ISBN002;Clean Code;2026-04-15
+2026-04-03;40555;Diego Ruiz;ISBN003;Introduction to Algorithms;2026-04-25
+2026-04-04;43310;Elena Sosa;ISBN001;Estructuras de Datos;2026-04-18
+2026-04-05;42001;Carla Nunez;ISBN002;Clean Code;2026-04-10

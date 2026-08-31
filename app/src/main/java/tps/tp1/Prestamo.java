@@ -107,4 +107,27 @@ String isbn, String titulo, LocalDate devolucion) {
         
         return multa > MULTA_MAXIMA ? MULTA_MAXIMA : multa;
     }
+
+    /**
+     * Getters
+     */
+
+    public LocalDate getRetiro(){
+        return retiro;
+    }
+    public int getPadron(){
+        return padron;
+    }
+    public String getIsbn(){
+        return isbn;
+    }
+    public String getSocio(){
+        return socio;
+    }
+    public String getTitulo(){
+        return titulo;
+    }
+    public LocalDate getDevolución(){
+        return devolucion;
+    }
 }
