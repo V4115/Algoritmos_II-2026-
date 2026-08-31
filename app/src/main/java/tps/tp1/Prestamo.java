@@ -30,13 +30,12 @@ String isbn, String titulo, LocalDate devolucion) {
     private static final String ERROR_MSG_ISBN_NULO = "El ISBN es obligatorio.";
     private static final String ERROR_MSG_TITULO_NULO = "El título es obligatorio.";
 
-
     // Constructor con validación de campos
     public Prestamo {
         validarCampos(retiro, padron, socio, isbn, titulo, devolucion);
     }
     
-    /**
+    /** 
      * Valida los campos del préstamo y lanza excepciones si alguno de ellos no cumple con las condiciones establecidas.
      * @param retiro la fecha de retiro del libro.
      * @param padron el padrón del socio.
@@ -46,6 +45,7 @@ String isbn, String titulo, LocalDate devolucion) {
      * @param devolucion la fecha de devolución del libro.
      * @throws IllegalArgumentException si algún campo no cumple con las condiciones establecidas.
      */
+
     private static void validarCampos(LocalDate retiro, int padron, String socio, String isbn, String titulo, LocalDate devolucion) {
         
         if (retiro == null){

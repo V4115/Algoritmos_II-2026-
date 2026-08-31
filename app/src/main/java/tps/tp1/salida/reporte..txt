@@ -1,6 +1,6 @@
 Padron   Socio                 Prestamos   DiasAtraso DiasAtraso Multa       
-39876    Bruno Ferrari                 3           12       1800 CON_DEUDA   
-43310    Elena Sosa                    2           10       1500 CON_DEUDA   
-41234    Ana Gomez                     3            4        600 CON_DEUDA   
-40555    Diego Ruiz                    2            2        300 CON_DEUDA   
-42001    Carla Nunez                   3            0          0 AL_DIA      
+39876    Bruno Ferrari                 4           24       3600 CON_DEUDA   
+41234    Ana Gomez                     4           23       3450 CON_DEUDA   
+40555    Diego Ruiz                    3           42       3300 CON_DEUDA   
+43310    Elena Sosa                    3           10       1500 CON_DEUDA   
+42001    Carla Nunez                   4            0          0 AL_DIA      

@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -18,6 +19,13 @@ public class LectorDePrestamos {
     private static final int ERRORES_FACTOR= 2;
     private static final String DELIM = ";";
     private static final String LINEA_MSG = "Linea: ";
+
+    private static final String ERROR_MSG_PARSE_CAMPOS_MIN = "Faltan campos obligatorios";
+    private static final String ERROR_MSG_PARSE_FECHA_INVALIDA = "Fecha inválida";
+    private static final String ERROR_MSG_PARSE_PADRON = "Valor de padrón inválido";
+
+    //PARSE ctes de validación
+    private static final int PARSE_CAMPOS_MIN = 5;
 
     public static ResultadoDeCarga cargar(Path archivo) throws IOException {
         
@@ -29,7 +37,7 @@ public class LectorDePrestamos {
         int cantErrores = 0;
         int cantDatos = 0;
 
-        //abre el archivo y hace una lista con c/linea
+        //abre el archivo y hace una lista con c/linean c/linea
         List<String> lineas = Files.readAllLines(archivo);
 
         RegistroDePrestamos registro = new RegistroSobreArreglo();
@@ -65,17 +73,44 @@ public class LectorDePrestamos {
     private static Prestamo parse(String linea, String delim, int numeroDeLinea){
         
         try {
-            String[] campos = linea.split(delim);
-            LocalDate fechaRetiro = LocalDate.parse(campos[0].trim());
-            int padron = Integer.parseInt(campos[1].trim());
+            //es importante el -1 en el split, porqur le dice que mantenga los campos vacíos.
+            //evita error out of bound cuando llama al campo[5], en una línea sin fecha de devolución.
+            String[] campos = linea.split(delim, -1);
+
+            //Validaciones
+
+            if (campos.length < PARSE_CAMPOS_MIN){
+                throw new IllegalArgumentException(ERROR_MSG_PARSE_CAMPOS_MIN);
+            }
+
+            LocalDate fechaRetiro = validarFecha(campos[0].trim());
+            int padron = validarPadron(campos[1].trim());
             String socio = campos[2].trim();
             String isbn = campos[3].trim();
             String titulo = campos[4].trim();
-            LocalDate fechaDevolucion = campos[5].trim().isBlank() ? null : LocalDate.parse(campos[5].trim());
+            LocalDate fechaDevolucion = campos[5].trim().isBlank() ? null : validarFecha(campos[5].trim());
 
             return new Prestamo(fechaRetiro, padron, socio, isbn, titulo, fechaDevolucion);
-            }catch (Exception e) {
+            }catch (IllegalArgumentException e) {
             throw new LineaInvalidaException(numeroDeLinea, e.getMessage());
+        }
+    }
+
+    //Metodos de validación en el parse para luego crear un prestamo
+    private static LocalDate validarFecha(String linea){
+        try {
+            return LocalDate.parse(linea);
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException(ERROR_MSG_PARSE_FECHA_INVALIDA);
+        }
+    }
+
+    //valida que sea efectivamente un numero int, luego prestamo verifica si es positivo
+    private static int validarPadron(String linea){
+        try {
+            return Integer.parseInt(linea);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(ERROR_MSG_PARSE_PADRON);
         }
     }
 
