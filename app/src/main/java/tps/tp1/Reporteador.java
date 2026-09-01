@@ -12,6 +12,18 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 //FilaDeSocio(int padron, String socio, int prestamos, int diasDeAtraso, int multa, String estado)
+
+/**
+ * Toma el registro de prestamos, identifica a cada persona por su padrón y crea un
+ * @param FilaDeSocio con sus datos:
+ * @param padron: número de padrón
+ * @param socio: el nombre de la persona
+ * @param prestamos: ls cantidad de prestamos a su nombre
+ * @param díasDeAtraso: el numero total de atraso que tienen todos su pedidos.
+ * @param multa: la suma de todas sus deudas por atraso de pedidos.
+ * @param estado: un mensaje que indica si está al día o con atraso.
+ * @return FilaDeSocio ordenado de mayor a menor por @param multa, y en caso de empate, por orden alfabetico de @param socio.
+ */
 public class Reporteador {
 
     private static final String ESTADO_MSG_DEUDA = "CON_DEUDA";

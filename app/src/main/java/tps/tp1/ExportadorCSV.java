@@ -54,6 +54,6 @@ public class ExportadorCSV implements ExportadorDeReporte {
 
     @Override
     public String extension() {
-        return "csv";
+        return EXTENSION_MSG;
     }
 }

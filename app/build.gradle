@@ -53,3 +53,6 @@ test {
     testLogging { events "passed", "skipped", "failed" }
 }
 
+application {
+    mainClass = 'tps.tp1.Tp1'
+}

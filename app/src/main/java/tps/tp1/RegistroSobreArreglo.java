@@ -17,7 +17,7 @@ public class RegistroSobreArreglo implements RegistroDePrestamos {
     //ERROR Msgs
     static final String ERROR_MSG_OBTENER_FUERA_DE_LIMITES = "ERROR: Fuera de límites";
     static final String ERROR_MSG_TITULOS_MAS_PEDIDOS_N_NEG = "ERROR: La cantidad de titulos más pedidos debe ser positiva";
-    private Prestamo[] prestamos; //Un hash sería mejor en mi opinión pero bueno :P piden arreglo
+    private Prestamo[] prestamos;
     private int largoUtilizado;
 
     //CONSTRUCTORES -------------------------------------------------------------------------------------------
@@ -30,6 +30,7 @@ public class RegistroSobreArreglo implements RegistroDePrestamos {
     //METODOS ABSTRACTOS --------------------------------------------------------------------------------------
     //METODOS DE CLASE ----------------------------------------------------------------------------------------
     
+    @Override
     public void registrar(Prestamo p){
         
         if (p == null){
@@ -47,10 +48,12 @@ public class RegistroSobreArreglo implements RegistroDePrestamos {
         largoUtilizado++;
     }
 
+    @Override
     public int cantidad(){
         return largoUtilizado;
     }
 
+    @Override
     public Prestamo obtener(int i){
         if (i < 0 || i >= largoUtilizado){
             throw new IndexOutOfBoundsException(ERROR_MSG_OBTENER_FUERA_DE_LIMITES);
@@ -59,6 +62,7 @@ public class RegistroSobreArreglo implements RegistroDePrestamos {
         return prestamos[i];
     }
 
+    @Override
     public int[] padrones(){
         int[] padrones = new int[largoUtilizado]; // Peor caso: Todos distintos
 
@@ -89,6 +93,7 @@ public class RegistroSobreArreglo implements RegistroDePrestamos {
         return Arrays.copyOf(unicos, len);
     }
 
+    @Override
     public Prestamo[] prestamosDe(int padron){
 
         Prestamo[] arreglo = new Prestamo[largoUtilizado]; // Peor caso: todos los prestamos de la misma persona
@@ -105,6 +110,7 @@ public class RegistroSobreArreglo implements RegistroDePrestamos {
         return Arrays.copyOf(arreglo, j);
     }
 
+    @Override
     public String[] titulosMasPedidos(int n) {
 
         if (n <= 0) {
