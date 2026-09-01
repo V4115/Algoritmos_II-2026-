@@ -23,12 +23,12 @@ String isbn, String titulo, LocalDate devolucion) {
     private static final int MULTA_MAXIMA = 3000;
     
     //Msg de error
-    private static final String ERROR_MSG_RETIRO_NULO = "La fecha de retiro es obligatoria.";
-    private static final String ERROR_MSG_DEVOLUCION_ANTERIOR_RETIRO = "La fecha de devolución no puede ser anterior a la fecha de retiro.";
-    private static final String ERROR_MSG_PADRON_NEGATIVO = "El padrón debe ser un número positivo.";
-    private static final String ERROR_MSG_SOCIO_NULO = "El nombre del socio es obligatorio.";
-    private static final String ERROR_MSG_ISBN_NULO = "El ISBN es obligatorio.";
-    private static final String ERROR_MSG_TITULO_NULO = "El título es obligatorio.";
+    private static final String ERROR_MSG_PRESTAMO_RETIRO_NULO = "La fecha de retiro es obligatoria.";
+    private static final String ERROR_MSG_PRESTAMO_DEVOLUCION_ANTERIOR_RETIRO = "La fecha de devolución no puede ser anterior a la fecha de retiro.";
+    private static final String ERROR_MSG_PRESTAMO_PADRON_NEGATIVO = "El padrón debe ser un número positivo.";
+    private static final String ERROR_MSG_PRESTAMO_SOCIO_NULO = "El nombre del socio es obligatorio.";
+    private static final String ERROR_MSG_PRESTAMO_ISBN_NULO = "El ISBN es obligatorio.";
+    private static final String ERROR_MSG_PRESTAMO_TITULO_NULO = "El título es obligatorio.";
 
     // Constructor con validación de campos
     public Prestamo {
@@ -49,22 +49,22 @@ String isbn, String titulo, LocalDate devolucion) {
     private static void validarCampos(LocalDate retiro, int padron, String socio, String isbn, String titulo, LocalDate devolucion) {
         
         if (retiro == null){
-            throw new IllegalArgumentException(ERROR_MSG_RETIRO_NULO);
+            throw new IllegalArgumentException(ERROR_MSG_PRESTAMO_RETIRO_NULO);
         }
         if (padron <= 0) {
-            throw new IllegalArgumentException(ERROR_MSG_PADRON_NEGATIVO);
+            throw new IllegalArgumentException(ERROR_MSG_PRESTAMO_PADRON_NEGATIVO);
         }
         if (socio == null || socio.trim().isEmpty()) {
-            throw new IllegalArgumentException(ERROR_MSG_SOCIO_NULO);
+            throw new IllegalArgumentException(ERROR_MSG_PRESTAMO_SOCIO_NULO);
         }
         if (isbn == null || isbn.trim().isEmpty()) {
-            throw new IllegalArgumentException(ERROR_MSG_ISBN_NULO);
+            throw new IllegalArgumentException(ERROR_MSG_PRESTAMO_ISBN_NULO);
         }
         if (titulo == null || titulo.trim().isEmpty()) {
-            throw new IllegalArgumentException(ERROR_MSG_TITULO_NULO);
+            throw new IllegalArgumentException(ERROR_MSG_PRESTAMO_TITULO_NULO);
         }
         if (devolucion != null && devolucion.isBefore(retiro)) {
-            throw new IllegalArgumentException(ERROR_MSG_DEVOLUCION_ANTERIOR_RETIRO);
+            throw new IllegalArgumentException(ERROR_MSG_PRESTAMO_DEVOLUCION_ANTERIOR_RETIRO);
         }
 
     }

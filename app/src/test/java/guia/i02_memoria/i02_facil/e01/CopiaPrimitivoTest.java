@@ -1,10 +1,8 @@
-package guia.i02_memoria.i02_facil.i_01;
+package guia.i02_memoria.i02_facil.e01;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import guia.i02_memoria.i02_facil.i01.CopiaPrimitivo;
 
 class CopiaPrimitivoTest {
 
