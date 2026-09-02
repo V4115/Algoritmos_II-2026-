@@ -57,10 +57,22 @@ public class Tp1 {
 
         exportadorTxt.exportar(
                 filas,
-                Path.of(SALIDA_POR_DEFECTO+ '/' + NOMBRE_ARCHIVO_REPORTE + '.' + exportadorTxt.extension())
-        );
+                Path.of(SALIDA_POR_DEFECTO + 
+                        '/' + 
+                        NOMBRE_ARCHIVO_REPORTE + 
+                        '.' + 
+                        exportadorTxt.extension()
+                    )
+                );
         //Imprimo los rankings
-        exportadorTxt.exportarRanking(registro.titulosMasPedidos(RANKING_CANT_TITULOS), Path.of(SALIDA_POR_DEFECTO+ '/' + NOMBRE_ARCHIVO_RANKING + '.' + exportadorTxt.extension()));
+        exportadorTxt.exportarRanking(registro.titulosMasPedidos(RANKING_CANT_TITULOS), 
+                                        Path.of(SALIDA_POR_DEFECTO + 
+                                        '/' + 
+                                        NOMBRE_ARCHIVO_RANKING + 
+                                        '.' + 
+                                        exportadorTxt.extension()
+                                    )
+                                );
 
         // Exportador CSV
         ExportadorDeReporte exportadorCsv = new ExportadorCSV();
@@ -70,6 +82,14 @@ public class Tp1 {
                 Path.of(SALIDA_POR_DEFECTO+ '/' + NOMBRE_ARCHIVO_REPORTE + '.' + exportadorCsv.extension())
         );
 
-        exportadorCsv.exportarRanking(registro.titulosMasPedidos(RANKING_CANT_TITULOS), Path.of(SALIDA_POR_DEFECTO+ '/' + NOMBRE_ARCHIVO_RANKING + '.' + exportadorCsv.extension()));
+        //Imprimo los rankings
+        exportadorCsv.exportarRanking(registro.titulosMasPedidos(RANKING_CANT_TITULOS), 
+                                        Path.of(SALIDA_POR_DEFECTO + 
+                                        '/' + 
+                                        NOMBRE_ARCHIVO_RANKING + 
+                                        '.' + 
+                                        exportadorCsv.extension()
+                                    )
+                                );
     }
 }
