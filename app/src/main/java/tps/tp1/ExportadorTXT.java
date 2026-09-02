@@ -11,7 +11,7 @@ import java.nio.file.Path;
 
 public class ExportadorTXT implements ExportadorDeReporte {
 
-    private static final String EXTENSION_MSG = ".txt";
+    private static final String EXTENSION_MSG = "txt";
     private static final String PADRON_MSG = "Padron";
     private static final String SOCIO_MSG = "Socio";
     private static final String PRESTAMOS_MSG = "Prestamos";

@@ -190,8 +190,10 @@ public class RegistroSobreArreglo implements RegistroDePrestamos {
 
         String[] titulosMasPedidos = new String[len];
 
-        System.arraycopy(titulos, 0, titulosMasPedidos, 0, len);
-
+        //No solo copia sino que también le agrega la cant de pedidos al final 
+        for (int i = 0; i < len; i++) {
+            titulosMasPedidos[i] = String.format("%-30s%d", titulos[i], cantidadPedidos[i]);
+        }
         return titulosMasPedidos;
     }
 

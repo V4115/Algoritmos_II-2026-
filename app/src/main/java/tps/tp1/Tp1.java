@@ -6,13 +6,21 @@ package tps.tp1;
  */
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
 
 public class Tp1 {
+    //Archivos
     private static final String ENTRADA_POR_DEFECTO = "src/main/java/tps/tp1/datos/prestamos.csv";
     private static final String SALIDA_POR_DEFECTO = "src/main/java/tps/tp1/salida";
+    private static final String NOMBRE_ARCHIVO_REPORTE = "reporte";
+    private static final String NOMBRE_ARCHIVO_RANKING = "ranking";
+    //fechas
     private static final LocalDate CORTE_POR_DEFECTO = LocalDate.parse("2026-05-04");
+
+    //Msg
+    private static final String USR_MSG_RESUMEN_DE_CARGA = "Lineas de datos: %d | validas: %d | descartadas: %d%n";
 
     public static void main(String[] args) throws IOException {
     // args[0] = archivo de entrada (opcional)
@@ -25,7 +33,7 @@ public class Tp1 {
 
     //Print resumen de carga
     System.out.printf(
-                "Lineas de datos: %d | validas: %d | descartadas: %d%n",
+                USR_MSG_RESUMEN_DE_CARGA,
                 carga.lineasDeDatos(),
                 registro.cantidad(),
                 carga.errores().length
@@ -47,15 +55,26 @@ public class Tp1 {
 
         exportadorTxt.exportar(
                 filas,
-                Path.of(SALIDA_POR_DEFECTO+ '/' + "reporte." + exportadorTxt.extension())
+                Path.of(SALIDA_POR_DEFECTO+ '/' + NOMBRE_ARCHIVO_REPORTE + '.' + exportadorTxt.extension())
         );
+
+        //Imprimo los rankings (Sólo por txt) //Hace su propia clase
+        int cantTitulos = 4; 
+        StringBuilder texto = new StringBuilder();
+        texto.append(String.format("%-8s%n", "Titulos más pedidos"));
+        
+        String[] ranking = registro.titulosMasPedidos(cantTitulos);
+        for(int i = 0; i < ranking.length; i++){
+           texto.append(String.format("%-4s%s%n", (i+1) + ")", ranking[i]));
+        }
+         Files.writeString(Path.of(SALIDA_POR_DEFECTO + '/' + NOMBRE_ARCHIVO_RANKING + '.' + "txt"), texto.toString());
 
         // Exportador CSV
         ExportadorDeReporte exportadorCsv = new ExportadorCSV();
 
         exportadorCsv.exportar(
                 filas,
-                Path.of(SALIDA_POR_DEFECTO + '/' + "reporte." + exportadorCsv.extension())
+                Path.of(SALIDA_POR_DEFECTO+ '/' + NOMBRE_ARCHIVO_REPORTE + '.' + exportadorCsv.extension())
         );
     }
 }

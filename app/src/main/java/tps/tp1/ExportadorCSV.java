@@ -11,7 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class ExportadorCSV implements ExportadorDeReporte {
-    private static final String EXTENSION_MSG = ".csv";
+    private static final String EXTENSION_MSG = "csv";
     private static final String PADRON_MSG = "Padron";
     private static final String SOCIO_MSG = "Socio";
     private static final String PRESTAMOS_MSG = "Prestamos";
