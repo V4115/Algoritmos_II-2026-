@@ -17,6 +17,8 @@ public class ExportadorCSV implements ExportadorDeReporte {
     private static final String PRESTAMOS_MSG = "Prestamos";
     private static final String DIAS_ATRASO_MSG = "DiasAtraso";
     private static final String MULTA_ESTADO_MSG = "Multa Estado";
+    private static final String RANKING_TITULOS_MAS_POPULARES_MSG = "Titulos más populares";
+    private static final String RANKING_CANTIDAD_MSG = "Cantidad de pedidos";
     private static final String DELIM = ";";
 
     @Override
@@ -55,5 +57,32 @@ public class ExportadorCSV implements ExportadorDeReporte {
     @Override
     public String extension() {
         return EXTENSION_MSG;
+    }
+
+    @Override
+    public void exportarRanking(String[]ranking, Path destino) throws IOException{
+         StringBuilder texto = new StringBuilder();
+
+        texto.append(RANKING_TITULOS_MAS_POPULARES_MSG + DELIM + RANKING_CANTIDAD_MSG +  '\n');
+
+        //entiendo que no es lo ideal, pero me limite el formato de ranking que me piden
+
+        for (String elemento : ranking) {
+
+        // Buscar el último espacio
+        int posicionCantidad = elemento.lastIndexOf(" ");
+
+        // Separar título y cantidad
+        String titulo = elemento.substring(0, posicionCantidad).trim();
+        String cantidad = elemento.substring(posicionCantidad + 1).trim();
+
+        // Escribir como CSV
+        texto.append(titulo)
+             .append(";")
+             .append(cantidad)
+             .append(System.lineSeparator());
+    }
+
+        Files.writeString(destino, texto.toString());
     }
 }

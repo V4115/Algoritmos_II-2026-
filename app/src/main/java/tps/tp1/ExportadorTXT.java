@@ -18,7 +18,6 @@ public class ExportadorTXT implements ExportadorDeReporte {
     private static final String DIAS_ATRASO_MSG = "DiasAtraso";
     private static final String MULTA_MSG = "Multa";
     private static final String ESTADO_MSG = "Estado";
-    private static final String SEPARACION_MSG = "--------------------------------------------------------------------\n";
     
     @Override
     public void exportar(FilaDeSocio[] filas, Path destino) throws IOException {
@@ -52,5 +51,18 @@ public class ExportadorTXT implements ExportadorDeReporte {
     @Override
     public String extension(){
         return EXTENSION_MSG;
+    }
+
+    @Override
+    public void exportarRanking(String[]ranking, Path destino) throws IOException{
+
+        StringBuilder texto = new StringBuilder();
+        texto.append(String.format("%-8s%n", "Titulos más pedidos"));
+    
+        for(int i = 0; i < ranking.length; i++){
+           texto.append(String.format("%-4s%s%n", (i+1) + ")", ranking[i]));
+        }
+
+        Files.writeString(destino, texto.toString());
     }
 }

@@ -6,7 +6,6 @@ package tps.tp1;
  */
 
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
 
@@ -21,6 +20,9 @@ public class Tp1 {
 
     //Msg
     private static final String USR_MSG_RESUMEN_DE_CARGA = "Lineas de datos: %d | validas: %d | descartadas: %d%n";
+
+    //CTES
+    private static final int RANKING_CANT_TITULOS = 3;
 
     public static void main(String[] args) throws IOException {
     // args[0] = archivo de entrada (opcional)
@@ -57,17 +59,8 @@ public class Tp1 {
                 filas,
                 Path.of(SALIDA_POR_DEFECTO+ '/' + NOMBRE_ARCHIVO_REPORTE + '.' + exportadorTxt.extension())
         );
-
-        //Imprimo los rankings (Sólo por txt) //Hace su propia clase
-        int cantTitulos = 4; 
-        StringBuilder texto = new StringBuilder();
-        texto.append(String.format("%-8s%n", "Titulos más pedidos"));
-        
-        String[] ranking = registro.titulosMasPedidos(cantTitulos);
-        for(int i = 0; i < ranking.length; i++){
-           texto.append(String.format("%-4s%s%n", (i+1) + ")", ranking[i]));
-        }
-         Files.writeString(Path.of(SALIDA_POR_DEFECTO + '/' + NOMBRE_ARCHIVO_RANKING + '.' + "txt"), texto.toString());
+        //Imprimo los rankings
+        exportadorTxt.exportarRanking(registro.titulosMasPedidos(RANKING_CANT_TITULOS), Path.of(SALIDA_POR_DEFECTO+ '/' + NOMBRE_ARCHIVO_RANKING + '.' + exportadorTxt.extension()));
 
         // Exportador CSV
         ExportadorDeReporte exportadorCsv = new ExportadorCSV();
@@ -76,5 +69,7 @@ public class Tp1 {
                 filas,
                 Path.of(SALIDA_POR_DEFECTO+ '/' + NOMBRE_ARCHIVO_REPORTE + '.' + exportadorCsv.extension())
         );
+
+        exportadorCsv.exportarRanking(registro.titulosMasPedidos(RANKING_CANT_TITULOS), Path.of(SALIDA_POR_DEFECTO+ '/' + NOMBRE_ARCHIVO_RANKING + '.' + exportadorCsv.extension()));
     }
 }
