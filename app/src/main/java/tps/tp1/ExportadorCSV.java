@@ -40,8 +40,7 @@ public class ExportadorCSV implements ExportadorDeReporte {
                     "%d" + DELIM + 
                     "%d" + DELIM + 
                     "%d" + DELIM + 
-                    "%s" + DELIM + 
-                    "%n",
+                    "%s" + "%n",
                     fila.padron(),
                     fila.socio(),
                     fila.prestamos(),
