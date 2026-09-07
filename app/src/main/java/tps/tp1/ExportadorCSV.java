@@ -16,7 +16,8 @@ public class ExportadorCSV implements ExportadorDeReporte {
     private static final String SOCIO_MSG = "Socio";
     private static final String PRESTAMOS_MSG = "Prestamos";
     private static final String DIAS_ATRASO_MSG = "DiasAtraso";
-    private static final String MULTA_ESTADO_MSG = "Multa Estado";
+    private static final String MULTA_MSG = "Multa";
+    private static final String ESTADO_MSG = "Estado";
     private static final String RANKING_TITULOS_MAS_POPULARES_MSG = "Titulos más populares";
     private static final String RANKING_CANTIDAD_MSG = "Cantidad de pedidos";
     private static final String DELIM = ";";
@@ -31,7 +32,8 @@ public class ExportadorCSV implements ExportadorDeReporte {
             SOCIO_MSG + DELIM  + 
             PRESTAMOS_MSG + DELIM + 
             DIAS_ATRASO_MSG + DELIM + 
-            MULTA_ESTADO_MSG + '\n');
+            MULTA_MSG + DELIM +
+            ESTADO_MSG + '\n');
 
         for (FilaDeSocio fila : filas) {
             texto.append(String.format(
@@ -60,28 +62,44 @@ public class ExportadorCSV implements ExportadorDeReporte {
 
     @Override
     public void exportarRanking(String[]ranking, Path destino) throws IOException{
+
+        Object[][] datos = obtenerDatosDelRanking(ranking);
+
          StringBuilder texto = new StringBuilder();
 
         texto.append(RANKING_TITULOS_MAS_POPULARES_MSG + DELIM + RANKING_CANTIDAD_MSG +  '\n');
 
         //entiendo que no es lo ideal, pero me limite el formato de ranking que me piden
 
-        for (String elemento : ranking) {
-
-        // Buscar el último espacio
-        int posicionCantidad = elemento.lastIndexOf(" ");
-
-        // Separar título y cantidad
-        String titulo = elemento.substring(0, posicionCantidad).trim();
-        String cantidad = elemento.substring(posicionCantidad + 1).trim();
-
+        for (Object[] fila : datos) {
         // Escribir como CSV
-        texto.append(titulo)
+        texto.append(fila[0])
              .append(";")
-             .append(cantidad)
+             .append(fila[1])
              .append(System.lineSeparator());
     }
 
         Files.writeString(destino, texto.toString());
+    }
+    
+    @Override
+    public Object[][] obtenerDatosDelRanking(String[] ranking) {
+
+        Object[][] datos = new Object[ranking.length][];
+
+        for (int i = 0; i < ranking.length; i++) {
+            String actual = ranking[i];
+
+            // Busco el último espacio
+            int posCant = actual.lastIndexOf(" ");
+
+            // Obtengo los datos de la línea
+            datos[i] = new Object[]{
+                actual.substring(0, posCant).trim(),
+                Integer.parseInt(actual.substring(posCant + 1).trim())
+            };
+        }
+
+        return datos;
     }
 }

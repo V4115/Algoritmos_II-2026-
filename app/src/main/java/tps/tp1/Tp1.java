@@ -54,41 +54,36 @@ public class Tp1 {
 
         // Exportador TXT
         ExportadorDeReporte exportadorTxt = new ExportadorTXT();
-
-        exportadorTxt.exportar(
-                filas,
-                Path.of(SALIDA_POR_DEFECTO + 
-                        '/' + 
-                        NOMBRE_ARCHIVO_REPORTE + 
-                        '.' + 
-                        exportadorTxt.extension()
-                    )
-                );
-        //Imprimo los rankings
-        exportadorTxt.exportarRanking(registro.titulosMasPedidos(RANKING_CANT_TITULOS), 
-                                        Path.of(SALIDA_POR_DEFECTO + 
-                                        '/' + 
-                                        NOMBRE_ARCHIVO_RANKING + 
-                                        '.' + 
-                                        exportadorTxt.extension()
-                                    )
-                                );
+        exportarDatos(exportadorTxt, filas, registro);
 
         // Exportador CSV
         ExportadorDeReporte exportadorCsv = new ExportadorCSV();
+        exportarDatos(exportadorCsv, filas, registro);
 
-        exportadorCsv.exportar(
+        // Exportador Xlsx
+        ExportadorDeReporte exportadorXlsx = new ExportadorXlsx();
+        exportarDatos(exportadorXlsx, filas, registro);
+
+        
+    }
+
+    private static void exportarDatos(
+        ExportadorDeReporte exportador, 
+        FilaDeSocio[] filas, 
+        RegistroDePrestamos registro) throws IOException{
+        
+        exportador.exportar(
                 filas,
-                Path.of(SALIDA_POR_DEFECTO+ '/' + NOMBRE_ARCHIVO_REPORTE + '.' + exportadorCsv.extension())
+                Path.of(SALIDA_POR_DEFECTO+ '/' + NOMBRE_ARCHIVO_REPORTE + '.' + exportador.extension())
         );
 
         //Imprimo los rankings
-        exportadorCsv.exportarRanking(registro.titulosMasPedidos(RANKING_CANT_TITULOS), 
+        exportador.exportarRanking(registro.titulosMasPedidos(RANKING_CANT_TITULOS), 
                                         Path.of(SALIDA_POR_DEFECTO + 
                                         '/' + 
                                         NOMBRE_ARCHIVO_RANKING + 
                                         '.' + 
-                                        exportadorCsv.extension()
+                                        exportador.extension()
                                     )
                                 );
     }

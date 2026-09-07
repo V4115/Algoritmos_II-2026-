@@ -65,4 +65,25 @@ public class ExportadorTXT implements ExportadorDeReporte {
 
         Files.writeString(destino, texto.toString());
     }
+
+    @Override
+    public Object[][] obtenerDatosDelRanking(String[] ranking) {
+
+        Object[][] datos = new Object[ranking.length][];
+
+        for (int i = 0; i < ranking.length; i++) {
+            String actual = ranking[i];
+
+            // Busco el último espacio
+            int posCant = actual.lastIndexOf(" ");
+
+            // Obtengo los datos de la línea
+            datos[i] = new Object[]{
+                actual.substring(0, posCant).trim(),
+                Integer.parseInt(actual.substring(posCant + 1).trim())
+            };
+        }
+
+        return datos;
+    }
 }
