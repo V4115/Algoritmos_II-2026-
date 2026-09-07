@@ -16,40 +16,46 @@ public class Tp1 {
     private static final String NOMBRE_ARCHIVO_REPORTE = "reporte";
     private static final String NOMBRE_ARCHIVO_RANKING = "ranking";
     //fechas
-    private static final LocalDate CORTE_POR_DEFECTO = LocalDate.parse("2026-05-04");
+    private static final String CORTE_POR_DEFECTO = "2026-05-04";
 
     //Msg
     private static final String USR_MSG_RESUMEN_DE_CARGA = "Lineas de datos: %d | validas: %d | descartadas: %d%n";
+    //Error MSG
+    private static final String ERROR_MSG_VALIDAR_ENTRADAS_DEMASIADAS_ENTRADAS = "Se permiten como máximo 2 argumentos";
+    private static final String ERROR_MSG_VALIDAR_ENTRADAS_FECHA_INVALIDA = "La fecha de corte debe tener formato ISO (YYYY-MM-DD).";
 
     //CTES
     private static final int RANKING_CANT_TITULOS = 3;
 
+    //Record para manejar los datos con los que se ejecuta el programa
+    private record Entradas(Path archivo, LocalDate fecha) {}
+
     public static void main(String[] args) throws IOException {
-    // args[0] = archivo de entrada (opcional)
-    // args[1] = fecha de corte ISO (opcional)
+        
+        Entradas entrada = validarEntradas(args, ENTRADA_POR_DEFECTO, CORTE_POR_DEFECTO);
 
-    ResultadoDeCarga carga = LectorDePrestamos.cargar(Path.of(ENTRADA_POR_DEFECTO));
+        ResultadoDeCarga carga = LectorDePrestamos.cargar(entrada.archivo);
     
-    //tomo el registro de carga
-    RegistroDePrestamos registro = carga.registro();
+        //tomo el registro de carga
+        RegistroDePrestamos registro = carga.registro();
 
-    //Print resumen de carga
-    System.out.printf(
-                USR_MSG_RESUMEN_DE_CARGA,
-                carga.lineasDeDatos(),
-                registro.cantidad(),
-                carga.errores().length
-        );
+        //Print resumen de carga
+        System.out.printf(
+                    USR_MSG_RESUMEN_DE_CARGA,
+                    carga.lineasDeDatos(),
+                    registro.cantidad(),
+                    carga.errores().length
+            );
 
         // Muestro errores
         for (String error : carga.errores()) {
             System.out.println(error);
         }
     
-    // Genero las filas del reporte
+        // Genero las filas del reporte
         FilaDeSocio[] filas = Reporteador.porSocio(
                 registro,
-                CORTE_POR_DEFECTO
+                entrada.fecha
         );
 
         // Exportador TXT
@@ -62,10 +68,10 @@ public class Tp1 {
 
         // Exportador Xlsx
         ExportadorDeReporte exportadorXlsx = new ExportadorXlsx();
-        exportarDatos(exportadorXlsx, filas, registro);
-
-        
+        exportarDatos(exportadorXlsx, filas, registro);        
     }
+
+    //Metodos privados
 
     private static void exportarDatos(
         ExportadorDeReporte exportador, 
@@ -86,5 +92,32 @@ public class Tp1 {
                                         exportador.extension()
                                     )
                                 );
+    }
+
+    private static Entradas validarEntradas(String[] args, String entradaPorDefecto, String cortePorDefecto){
+        // args[0] = archivo de entrada (opcional)
+        // args[1] = fecha de corte ISO (opcional)
+
+        if (args.length > 2){
+            throw new IllegalArgumentException(ERROR_MSG_VALIDAR_ENTRADAS_DEMASIADAS_ENTRADAS);
+        }
+
+        Path archivo = Path.of(entradaPorDefecto);
+        LocalDate fechaDeCorte = LocalDate.parse(cortePorDefecto);
+
+        //No valida que el archivo exista, eso lo hace LectorDePrestamo
+        if (args.length >= 1){
+            archivo = Path.of(args[0]);
+        }
+
+        if (args.length >= 2) {
+        try {
+            fechaDeCorte = LocalDate.parse(args[1]);
+        } catch (java.time.format.DateTimeParseException e) {
+            throw new IllegalArgumentException(ERROR_MSG_VALIDAR_ENTRADAS_FECHA_INVALIDA);
+        }
+    }
+
+        return new Entradas(archivo, fechaDeCorte);
     }
 }

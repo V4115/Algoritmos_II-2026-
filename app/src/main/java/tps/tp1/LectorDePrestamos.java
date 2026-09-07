@@ -20,6 +20,7 @@ public class LectorDePrestamos {
     private static final String DELIM = ";";
     private static final String LINEA_MSG = "Linea: ";
 
+    private static final String ERROR_MSG_PATH_ARCHIVO_NO_EXISTE = "El archivo indicado no existe: ";
     private static final String ERROR_MSG_PARSE_CAMPOS_MIN = "Faltan campos obligatorios";
     private static final String ERROR_MSG_PARSE_FECHA_INVALIDA = "Fecha inválida";
     private static final String ERROR_MSG_PARSE_PADRON = "Valor de padrón inválido";
@@ -29,8 +30,14 @@ public class LectorDePrestamos {
 
     public static ResultadoDeCarga cargar(Path archivo) throws IOException {
         
+        //validar el path del archivo a leer
         if (archivo == null){
             throw new NullPointerException();
+        }
+        if (!Files.exists(archivo)) {
+            throw new IllegalArgumentException(
+                ERROR_MSG_PATH_ARCHIVO_NO_EXISTE + archivo
+            );
         }
 
         String[] errores = new String[ERRORES_TAMANO_INICIAL];
