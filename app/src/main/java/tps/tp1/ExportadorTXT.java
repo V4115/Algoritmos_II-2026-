@@ -29,7 +29,6 @@ public class ExportadorTXT implements ExportadorDeReporte {
                 SOCIO_MSG, 
                 PRESTAMOS_MSG, 
                 DIAS_ATRASO_MSG, 
-                DIAS_ATRASO_MSG, 
                 MULTA_MSG, 
                 ESTADO_MSG
                 ));

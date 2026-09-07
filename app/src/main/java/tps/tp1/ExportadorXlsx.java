@@ -12,7 +12,7 @@ import librerias.excel.ExcelUtils;
 public class ExportadorXlsx implements ExportadorDeReporte{
     
     private static final String RANKING_MSG = "Ranking";
-    private static final String EXTENSION_MSG = "Xlsx";
+    private static final String EXTENSION_MSG = "xlsx";
     private static final String PADRON_MSG = "Padron";
     private static final String SOCIO_MSG = "Socio";
     private static final String PRESTAMOS_MSG = "Prestamos";
@@ -32,7 +32,7 @@ public class ExportadorXlsx implements ExportadorDeReporte{
         datos[f] = new Object[]{fila.padron(), fila.socio(), fila.prestamos(),
         fila.diasDeAtraso(), fila.multa(), fila.estado()};
         }
-        ExcelUtils.escribir(destino, "Multas", encabezados, datos);
+        ExcelUtils.escribir(destino, MULTA_MSG, encabezados, datos);
     }
 
     @Override
