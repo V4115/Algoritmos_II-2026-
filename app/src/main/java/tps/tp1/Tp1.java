@@ -6,12 +6,13 @@ package tps.tp1;
  */
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
 
 public class Tp1 {
     //Archivos
-    private static final String ENTRADA_POR_DEFECTO = "src/main/java/tps/tp1/datos/prueba.csv";
+    private static final String ENTRADA_POR_DEFECTO = "src/main/java/tps/tp1/datos/prestamos.csv";
     private static final String SALIDA_POR_DEFECTO = "src/main/java/tps/tp1/salida";
     private static final String NOMBRE_ARCHIVO_REPORTE = "reporte";
     private static final String NOMBRE_ARCHIVO_RANKING = "ranking";
@@ -23,7 +24,7 @@ public class Tp1 {
     //Error MSG
     private static final String ERROR_MSG_VALIDAR_ENTRADAS_DEMASIADAS_ENTRADAS = "Se permiten como máximo 2 argumentos";
     private static final String ERROR_MSG_VALIDAR_ENTRADAS_FECHA_INVALIDA = "La fecha de corte debe tener formato ISO (YYYY-MM-DD).";
-
+    private static final String ERROR_MSG_PATH_ARCHIVO_NO_EXISTE = "El archivo de entrada no existe";
     //CTES
     private static final int RANKING_CANT_TITULOS = 3;
 
@@ -32,7 +33,16 @@ public class Tp1 {
 
     public static void main(String[] args) throws IOException {
         
-        Entradas entrada = validarEntradas(args, ENTRADA_POR_DEFECTO, CORTE_POR_DEFECTO);
+        Entradas entrada;
+        
+        //Valida que la entrada exista y sea válida
+        try {
+            entrada = validarEntradas(args, ENTRADA_POR_DEFECTO, CORTE_POR_DEFECTO);
+        } catch (IllegalArgumentException e) {
+            System.out.print(e.getMessage());
+            return;
+        }
+        
 
         ResultadoDeCarga carga = LectorDePrestamos.cargar(entrada.archivo);
     
@@ -105,11 +115,18 @@ public class Tp1 {
         Path archivo = Path.of(entradaPorDefecto);
         LocalDate fechaDeCorte = LocalDate.parse(cortePorDefecto);
 
-        //No valida que el archivo exista, eso lo hace LectorDePrestamo
+
         if (args.length >= 1){
             archivo = Path.of(args[0]);
         }
 
+        //verifica que el archivo de entrada existe
+        if (!Files.exists(archivo)) {
+            throw new IllegalArgumentException(
+                ERROR_MSG_PATH_ARCHIVO_NO_EXISTE + archivo
+            );
+        }
+        
         if (args.length >= 2) {
         try {
             fechaDeCorte = LocalDate.parse(args[1]);

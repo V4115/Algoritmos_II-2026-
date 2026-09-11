@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 public class ExportadorCSVTest{
 
-    private static final String TEST_EXPORTADOR_CSV_CABECERA = "Padron;Socio;Prestamos;DiasAtraso;Multa Estado";
+    private static final String TEST_EXPORTADOR_CSV_CABECERA = "Padron;Socio;Prestamos;DiasAtraso;Multa;Estado";
 
     @Test 
     public void testEscrituraYLecturaDeArchivos() throws IOException{

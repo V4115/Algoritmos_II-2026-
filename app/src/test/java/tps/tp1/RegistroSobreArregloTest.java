@@ -3,6 +3,7 @@ package tps.tp1;
 import java.time.LocalDate;
 import java.util.HashSet;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 public class RegistroSobreArregloTest{
@@ -82,6 +83,30 @@ public class RegistroSobreArregloTest{
 
         String[] titulosMasPedidos = registro.titulosMasPedidos(2);
 
-        assert titulosMasPedidos[0].equals("Algoritmos");
+        //Obtengo datos 
+        Object[][] datos = obtenerDatosDelRanking(titulosMasPedidos);
+
+        assertEquals("Algoritmos", datos[0][0]);
+        assertEquals(3, datos[0][1]);
+    }
+
+    public Object[][] obtenerDatosDelRanking(String[] ranking) {
+
+        Object[][] datos = new Object[ranking.length][];
+
+        for (int i = 0; i < ranking.length; i++) {
+            String actual = ranking[i];
+
+            // Busco el último espacio
+            int posCant = actual.lastIndexOf(" ");
+
+            // Obtengo los datos de la línea
+            datos[i] = new Object[]{
+                actual.substring(0, posCant).trim(),
+                Integer.parseInt(actual.substring(posCant + 1).trim())
+            };
+        }
+
+        return datos;
     }
 }
