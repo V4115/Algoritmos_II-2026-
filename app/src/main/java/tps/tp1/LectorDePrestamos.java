@@ -26,7 +26,7 @@ public class LectorDePrestamos {
     private static final String ERROR_MSG_PARSE_PADRON = "Valor de padrón inválido";
 
     //PARSE ctes de validación
-    private static final int PARSE_CAMPOS_MIN = 5;
+    private static final int PARSE_CAMPOS_MIN = 6;
 
     public static ResultadoDeCarga cargar(Path archivo) throws IOException {
         

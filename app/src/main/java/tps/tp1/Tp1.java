@@ -11,7 +11,7 @@ import java.time.LocalDate;
 
 public class Tp1 {
     //Archivos
-    private static final String ENTRADA_POR_DEFECTO = "src/main/java/tps/tp1/datos/prestamos.csv";
+    private static final String ENTRADA_POR_DEFECTO = "src/main/java/tps/tp1/datos/prueba.csv";
     private static final String SALIDA_POR_DEFECTO = "src/main/java/tps/tp1/salida";
     private static final String NOMBRE_ARCHIVO_REPORTE = "reporte";
     private static final String NOMBRE_ARCHIVO_RANKING = "ranking";
