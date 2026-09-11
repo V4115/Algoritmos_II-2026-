@@ -8,12 +8,7 @@ contenido. Pasale el checklist completo antes de entregar; el test incluye los c
 (checklist 20).
  */
 
-import java.util.Arrays;
-
 public class Zoologico{
-
-    //Ctes de zoologico
-    private static final int  ANIMALES_ARREGLO_FACTOR = 2;
 
     //variables privadas
     private Animal[] animales;
@@ -27,22 +22,9 @@ public class Zoologico{
 
     //metodos publicos
     public void ingresar(Animal animal){
-        if(cantidad >= animales.length){
-            animales = agrandarAnimales(animales, cantidad*);
-        }
     }
 
     //metodos privados
 
-    /**
-     * Agranda el arreglo de animales
-     * @param animales arreglo de animales
-     * @param len nueva longitud del arreglo, no puede ser menor a la longitud actual
-     * @return arreglo de animales con nueva longitud
-     */
-    
-    private Animal[] agrandarAnimales(Animal[] animales, int len){
-        return Arrays.copyOf(animales, len);
-    }
 }
 
