@@ -4,7 +4,7 @@ package guia.i03_poo.i04_dificil.e01;
  * Animal (nombre, especie, peso)
  */
 
-public class Animal {
+public abstract class Animal {
 
     // variables privadas
     private final String nombre;
@@ -31,5 +31,5 @@ public class Animal {
         return peso;
     }
 
-    
+
 }
