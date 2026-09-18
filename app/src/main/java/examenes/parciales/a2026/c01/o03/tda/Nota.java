@@ -1,4 +1,4 @@
-package ar.uba.fi.cb100.examenes.parciales.a2026.c01.o03.tda;
+package examenes.parciales.a2026.c01.o03.tda;
 
 public enum Nota {
     DO,

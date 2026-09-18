@@ -1,6 +1,6 @@
-package ar.uba.fi.cb100.examenes.parciales.a2026.c01.o03.tda;
+package examenes.parciales.a2026.c01.o03.tda;
 
-import ar.uba.fi.cb100.clases.a2026.c02.s04.ValidacionesUtiles;
+import utils.validaciones_utiles.ValidacionesUtiles;
 
 public class Piano {
 //ATRIBUTOS DE CLASE --------------------------------------------------------------------------------------
