@@ -61,5 +61,5 @@ test {
 }
 
 application {
-    mainClass = 'tps.tp1.Tp1'
+    mainClass = project.findProperty('runClassName') ?: 'tps.tp1.Tp1'
 }
