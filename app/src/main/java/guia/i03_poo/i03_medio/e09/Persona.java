@@ -1,4 +1,7 @@
-package ar.uba.fi.cb100.guia.i03_poo.i03_medio.e09;
+package guia.i03_poo.i03_medio.e09;
+/**
+ * 9. Método default. Interfaz con un método default; una implementación; test.
+ */
 
 import java.util.Objects;
 
