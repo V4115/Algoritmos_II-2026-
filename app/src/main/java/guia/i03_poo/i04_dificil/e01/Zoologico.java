@@ -42,7 +42,7 @@ public class Zoologico{
             }
             sb.append("]}");
             return sb.toString();
-            }
+        }
         //equals
         //hashCode
     //METODOS DE COMPORTAMIENTO -------------------------------------------------------------------------------
