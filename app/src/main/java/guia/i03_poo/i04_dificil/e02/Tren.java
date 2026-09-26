@@ -71,7 +71,9 @@ public class Tren{
         Vagon aux = vagones[getCantidadDeVagones() - 1];
 
         setcantidadDeVagones(--cantVagones);
-
+        if(aux == this.vagonMasCargado){
+            this.vagonMasCargado = buscarVagonMasCargado();
+        }
         return aux;
     }
 
@@ -80,16 +82,36 @@ public class Tren{
             throw new IllegalArgumentException("Tren: Carga Invalida");
         }
 
-        for (Vagon actual : vagones){
-            //por el momento solo cargo si puedo cargar todo en un vagon libre, por simplicidad
-            if (actual.getLugarLibre() >= carga){
+
+        //por el momento solo cargo si puedo cargar todo en un vagon libre, por simplicidad
+        for (int i = 0; i < cantVagones; i++) {
+            Vagon actual = vagones[i];
+            if (actual.getLugarLibre() >= carga) {
                 actual.cargar(carga);
                 setCargaTotal(getCargaTotal() + carga);
+                if(actual.getCarga() > this.vagonMasCargado.getCarga()){
+                    vagonMasCargado = actual;
+                }
                 return true;
             }
         }
 
         return false;
+    }
+
+    private Vagon buscarVagonMasCargado(){
+        if(cantVagones == 0){
+            return null;
+        }
+        Vagon masCargado = this.vagones[0];
+
+        for (int i = 1; i < this.cantVagones; i++){
+            if (this.vagones[i].getCarga() > masCargado.getCarga()){
+                masCargado = this.vagones[i];
+            }
+        }
+
+        return masCargado;
     }
     //GETTERS SIMPLES -----------------------------------------------------------------------------------------
     private int getCantidadMaximaDeVagones(){
@@ -120,7 +142,7 @@ public class Tren{
     //No pregunta si es una cargaTotal valida, más allá de si es negativo o NaN: 
     //ejm: si no hay vagones y le asignas 20kg de carga total, no se da cuenta
     private void setCargaTotal(double nuevaCargaTotal){
-        if(nuevaCargaTotal < 0 || Double.isNaN(cargaTotal)){
+        if(nuevaCargaTotal < 0 || Double.isNaN(nuevaCargaTotal)){
             throw new IllegalArgumentException("CargaTotal invalida");
         }
 
