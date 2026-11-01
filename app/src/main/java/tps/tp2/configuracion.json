@@ -1,0 +1,10 @@
+{
+    "version": 1,
+    "dificultad": "MEDIO",
+    "filas": 15,
+    "columnas": 20,
+    "semilla": 42,
+    "cofres": 2,
+    "monstruos": 2,
+    "conSalida": false
+}
