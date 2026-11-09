@@ -282,7 +282,7 @@ public class GeneradorCarpincho implements GeneradorDeLaberinto{
     // Algoritmo de búsqueda de caminos -----------------------------------
     private static final class Bfs{
 
-         /**
+        /**
          * Realiza un BFS desde la celda origen y devuelve una grilla con la cantidad de pasos desde el origen a cada celda. Las celdas inalcanzables quedan con valor -1.
          * @param grilla Grilla del laberinto
          * @param origen Celda de origen del BFS
